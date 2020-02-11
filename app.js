@@ -161,6 +161,16 @@ let UIController = (function () {
 
         },
 
+
+        deleteListItem: function (selectorID) {
+
+            let el = document.getElementById(selectorID);
+            el.parentNode.removeChild(el)
+
+        },
+
+
+
         clearFields: function () {
             let fields, fieldsArr;
 
@@ -231,6 +241,13 @@ let controller = (function (budgetCtr, UICtrl) {
 
     };
 
+    let updatePercentages = function () {
+        //расчитать процент
+        //прочитать из баджет контролера
+        //обновить UI
+
+    };
+
     let ctrlAddItem = function () {
         let input, newItem;
 
@@ -250,6 +267,9 @@ let controller = (function (budgetCtr, UICtrl) {
             // 5. расчет и добавление бюджета
             updateBudget();
             console.log('Добавление работает');
+
+            // 6. обновление процентов
+            updatePercentages();
         }
     };
 
@@ -268,8 +288,11 @@ let controller = (function (budgetCtr, UICtrl) {
             // 1. delete item from data structure
             budgetCtr.deleteItem(type, ID);
             // 2. delete item from UI
+            UICtrl.deleteListItem(itemID)
             // 3. update and show new budget
-
+            updateBudget();
+            // 4. обновление процентов
+            updatePercentages();
         }
     };
 
