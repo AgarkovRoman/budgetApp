@@ -156,6 +156,7 @@ let UIController = (function () {
         percentageLabel: '.budget__expenses--percentage',
         container: '.container',
         expensesPercLabel: '.item__percentage',
+        dateLabel: '.budget__title--month',
     };
 
     var formatNumber = function (num, type) {
@@ -272,6 +273,15 @@ let UIController = (function () {
 
         },
 
+        displayMonth: function () {
+            let now, year;
+            now = new Date();
+            months = ['Январе', 'Феврале', 'Марте', 'Апреле', 'Мае', 'Июне', 'Июле', 'Августе', 'Сентябре', 'Октябре', 'Ноябре', 'Декабре'];
+            month = now.getMonth();
+            year = now.getFullYear();
+            document.querySelector(DOMstrings.dateLabel).textContent = `${months[month]} ${year}`;
+        },
+
         getDOMstrings: function () {
             return DOMstrings;
         }
@@ -373,6 +383,7 @@ let controller = (function (budgetCtr, UICtrl) {
     return {
         init: function () {
             console.log('Приложение работает');
+            UICtrl.displayMonth();
             UICtrl.displayBudget({
                 budget: 0,
                 totalInc: 0,
